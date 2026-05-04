@@ -1,36 +1,78 @@
-let currInput = 0;
-let savedInput = 0;
-let currOperator = 0;
-let currSummery = 0;
-// to Display
-function appendToDisplay(num) {
-  currInput = currInput * 10 + num;
-  console.log(currInput);
-}
-// übergabe
-function transfer() {
-  savedInput = currInput;
-  console.log("gespeichert" + savedInput);
-}
-// Plus
-function addOperation(operation) {
-  transfer();
-  currOperator = operation;
-  currInput = 0;
-}
-// minus
-function minus() {}
+let currNumber = 0;
+let saveNumber = 0;
+let operator = "";
 
-// mal
-function mal() {}
-// geteilt
-function geteilt() {}
+// append To Display
+function appendToDisplay(number) {
+  currNumber = currNumber * 10 + number;
+  renderOperationDisplay();
+}
 
-// istgleich
-function sumary() {
-  currSummery = eval(`${currInput} ${currOperator} ${savedInput} `);
-  console.log("ergebnis" + currSummery);
-  currInput = currSummery;
+function startOperate() {
+  let currsummery = 0;
+  if (operator === "+") {
+    currsummery = currNumber + saveNumber;
+    saveNumber = currsummery;
+  } else if (operator === "-") {
+    currsummery = saveNumber - currNumber;
+    saveNumber = currsummery;
+  } else if (operator === "*") {
+    currsummery = saveNumber * currNumber;
+    saveNumber = currsummery;
+  } else if (operator === "/") {
+    currsummery = saveNumber / currNumber;
+    saveNumber = currsummery;
+  } else {
+    saveNumber = currNumber;
+  }
+}
 
-  transfer();
+function add() {
+  startOperate();
+
+  operator = "+";
+
+  renderSummaryDisplay();
+  renderOperationDisplay();
+
+  currNumber = 0;
+}
+function subtrahieren() {
+  startOperate();
+  currNumber = 0;
+  operator = "-";
+  renderSummaryDisplay();
+  renderOperationDisplay();
+}
+function multipliziern() {
+  startOperate();
+  currNumber = 0;
+  operator = "*";
+  renderSummaryDisplay();
+  renderOperationDisplay();
+}
+function dividieren() {
+  startOperate();
+  currNumber = 0;
+  operator = "/";
+  renderSummaryDisplay();
+  renderOperationDisplay();
+}
+// update and add
+
+// RenderFN
+function renderOperationDisplay() {
+  const newDisplay = document.getElementById("operationDisplay");
+  newDisplay.innerHTML = `${currNumber}`;
+}
+
+function renderSummaryDisplay() {
+  const newSummeryDisplay = document.getElementById("summery");
+  newSummeryDisplay.innerHTML = `${saveNumber} ${operator}`;
+}
+function renderResult() {
+  const newRenderelement = document.getElementById("resultDiv");
+  const newParagraph = document.createElement("p");
+  newParagraph.innerHTML = `${currNumber} ${operator} ${saveNumber} = `;
+  newRenderelement.appendChild(newParagraph);
 }
