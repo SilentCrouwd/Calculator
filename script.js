@@ -5,6 +5,19 @@ let operator = "";
 let summeryGlobal = "";
 let killswitch = false;
 // append To Display
+function appendToDisplay(number) {
+  if (operator === "=") {
+    currentInput = 0;
+    savedInput = 0;
+    operator = "+";
+    summeryGlobal = 0;
+    renderOperationDisplay(currentInput);
+    renderSummaryDisplay("", "");
+  } else {
+    currentInput = currentInput * 10 + number;
+    renderOperationDisplay(currentInput);
+  }
+}
 
 function startOperate() {
   let currsummery = 0;
@@ -114,18 +127,5 @@ function renderResult() {
     newRenderelement.innerHTML = "";
     killswitch = false;
     console.log("lets kill something");
-  }
-}
-function appendToDisplay(number) {
-  if (operator === "=") {
-    currentInput = 0;
-    savedInput = 0;
-    operator = "+";
-    summeryGlobal = 0;
-    renderOperationDisplay(currentInput);
-    renderSummaryDisplay("", "");
-  } else {
-    currentInput = currentInput * 10 + number;
-    renderOperationDisplay(currentInput);
   }
 }
