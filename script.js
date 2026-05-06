@@ -1,5 +1,5 @@
 // Global Variable
-let currNumber = 0;
+let currentInput = 0;
 let saveNumber = 0;
 let operator = "";
 let flowSummery = "";
@@ -9,24 +9,24 @@ let killswitch = false;
 function startOperate() {
   let currsummery = 0;
   if (operator === "+") {
-    currsummery = currNumber + saveNumber;
+    currsummery = currentInput + saveNumber;
     flowSummery = currsummery;
     renderResult();
     saveNumber = currsummery;
 
     console.log(flowSummery);
   } else if (operator === "-") {
-    currsummery = saveNumber - currNumber;
+    currsummery = saveNumber - currentInput;
     flowSummery = currsummery;
     renderResult();
     saveNumber = currsummery;
   } else if (operator === "*") {
-    currsummery = saveNumber * currNumber;
+    currsummery = saveNumber * currentInput;
     flowSummery = currsummery;
     renderResult();
     saveNumber = currsummery;
   } else if (operator === "/") {
-    currsummery = saveNumber / currNumber;
+    currsummery = saveNumber / currentInput;
     flowSummery = currsummery;
     renderResult();
     saveNumber = currsummery;
@@ -35,7 +35,7 @@ function startOperate() {
       renderResult();
     }
   } else {
-    saveNumber = currNumber;
+    saveNumber = currentInput;
   }
 }
 
@@ -45,30 +45,30 @@ function add() {
   operator = "+";
 
   renderSummaryDisplay(saveNumber, operator);
-  renderOperationDisplay(currNumber);
+  renderOperationDisplay(currentInput);
 
-  currNumber = 0;
+  currentInput = 0;
 }
 function subtrahieren() {
   startOperate();
-  currNumber = 0;
+  currentInput = 0;
   operator = "-";
   renderSummaryDisplay(saveNumber, operator);
-  renderOperationDisplay(currNumber);
+  renderOperationDisplay(currentInput);
 }
 function multipliziern() {
   startOperate();
-  currNumber = 0;
+  currentInput = 0;
   operator = "*";
   renderSummaryDisplay(saveNumber, operator);
-  renderOperationDisplay(currNumber);
+  renderOperationDisplay(currentInput);
 }
 function dividieren() {
   startOperate();
-  currNumber = 0;
+  currentInput = 0;
   operator = "/";
   renderSummaryDisplay(saveNumber, operator);
-  renderOperationDisplay(currNumber);
+  renderOperationDisplay(currentInput);
 }
 function sumary() {
   startOperate();
@@ -79,11 +79,11 @@ function sumary() {
 }
 
 function reset() {
-  currNumber = 0;
+  currentInput = 0;
   saveNumber = 0;
   flowSummery = 0;
   operator = "+";
-  renderOperationDisplay(currNumber);
+  renderOperationDisplay(currentInput);
   renderSummaryDisplay("", "");
   killswitch = true;
   renderResult();
@@ -108,7 +108,7 @@ function renderResult() {
   const newRenderelement = document.getElementById("resultDiv");
 
   if (killswitch === false) {
-    newParagraph.innerHTML = `${currNumber} ${operator} ${saveNumber} = ${flowSummery}`;
+    newParagraph.innerHTML = `${currentInput} ${operator} ${saveNumber} = ${flowSummery}`;
     newRenderelement.appendChild(newParagraph);
   } else {
     newRenderelement.innerHTML = "";
@@ -118,14 +118,14 @@ function renderResult() {
 }
 function appendToDisplay(number) {
   if (operator === "=") {
-    currNumber = 0;
+    currentInput = 0;
     saveNumber = 0;
     operator = "+";
     flowSummery = 0;
-    renderOperationDisplay(currNumber);
+    renderOperationDisplay(currentInput);
     renderSummaryDisplay("", "");
   } else {
-    currNumber = currNumber * 10 + number;
-    renderOperationDisplay(currNumber);
+    currentInput = currentInput * 10 + number;
+    renderOperationDisplay(currentInput);
   }
 }
