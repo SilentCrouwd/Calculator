@@ -5,17 +5,18 @@ let operator = "";
 let summeryGlobal = "";
 let killswitch = false;
 // append To Display
+
 function appendToDisplay(number) {
   if (operator === "=") {
     currentInput = 0;
     savedInput = 0;
     operator = "+";
     summeryGlobal = 0;
-    renderOperationDisplay(currentInput);
-    renderSummaryDisplay("", "");
+    updateCurrentInputDisplay(currentInput);
+    updateProvSummery("", "");
   } else {
     currentInput = currentInput * 10 + number;
-    renderOperationDisplay(currentInput);
+    updateCurrentInputDisplay(currentInput);
   }
 }
 
@@ -24,28 +25,28 @@ function startOperate() {
   if (operator === "+") {
     currsummery = currentInput + savedInput;
     summeryGlobal = currsummery;
-    renderResult();
+    updateResultContainer();
     savedInput = currsummery;
 
     console.log(summeryGlobal);
   } else if (operator === "-") {
     currsummery = savedInput - currentInput;
     summeryGlobal = currsummery;
-    renderResult();
+    updateResultContainer();
     savedInput = currsummery;
   } else if (operator === "*") {
     currsummery = savedInput * currentInput;
     summeryGlobal = currsummery;
-    renderResult();
+    updateResultContainer();
     savedInput = currsummery;
   } else if (operator === "/") {
     currsummery = savedInput / currentInput;
     summeryGlobal = currsummery;
-    renderResult();
+    updateResultContainer();
     savedInput = currsummery;
   } else if (operator === "=") {
     if (operator !== "=") {
-      renderResult();
+      updateResultContainer();
     }
   } else {
     savedInput = currentInput;
@@ -57,8 +58,8 @@ function add() {
 
   operator = "+";
 
-  renderSummaryDisplay(savedInput, operator);
-  renderOperationDisplay(currentInput);
+  updateProvSummery(savedInput, operator);
+  updateCurrentInputDisplay(currentInput);
 
   currentInput = 0;
 }
@@ -66,29 +67,29 @@ function subtrahieren() {
   startOperate();
   currentInput = 0;
   operator = "-";
-  renderSummaryDisplay(savedInput, operator);
-  renderOperationDisplay(currentInput);
+  updateProvSummery(savedInput, operator);
+  updateCurrentInputDisplay(currentInput);
 }
 function multipliziern() {
   startOperate();
   currentInput = 0;
   operator = "*";
-  renderSummaryDisplay(savedInput, operator);
-  renderOperationDisplay(currentInput);
+  updateProvSummery(savedInput, operator);
+  updateCurrentInputDisplay(currentInput);
 }
 function dividieren() {
   startOperate();
   currentInput = 0;
   operator = "/";
-  renderSummaryDisplay(savedInput, operator);
-  renderOperationDisplay(currentInput);
+  updateProvSummery(savedInput, operator);
+  updateCurrentInputDisplay(currentInput);
 }
 function sumary() {
   startOperate();
   operator = "=";
 
-  renderSummaryDisplay(savedInput, operator);
-  renderOperationDisplay(savedInput);
+  updateProvSummery(savedInput, operator);
+  updateCurrentInputDisplay(savedInput);
 }
 
 function reset() {
@@ -96,27 +97,27 @@ function reset() {
   savedInput = 0;
   summeryGlobal = 0;
   operator = "+";
-  renderOperationDisplay(currentInput);
-  renderSummaryDisplay("", "");
+  updateCurrentInputDisplay(currentInput);
+  updateProvSummery("", "");
   killswitch = true;
-  renderResult();
+  updateResultContainer();
 }
 
 // update and add
 
 // RenderFN
-function renderOperationDisplay(text) {
+function updateCurrentInputDisplay(text) {
   const newDisplay = document.getElementById("operationDisplay");
 
   newDisplay.innerHTML = text;
 }
 
-function renderSummaryDisplay(text, text2) {
+function updateProvSummery(text, text2) {
   const newSummeryDisplay = document.getElementById("summery");
 
   newSummeryDisplay.innerHTML = text + text2;
 }
-function renderResult() {
+function updateResultContainer() {
   const newParagraph = document.createElement("p");
   const newRenderelement = document.getElementById("resultDiv");
 
