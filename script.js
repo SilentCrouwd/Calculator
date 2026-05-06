@@ -10,9 +10,9 @@ function appendToDisplay(number) {
   if (operator === "=") {
     currentInput = 0;
     savedInput = 0;
-    operator = "+";
+    operator = "";
     summeryGlobal = 0;
-    updateCurrentInputDisplay(currentInput);
+    updateCurrentInputDisplay("");
     updateProvSummery("", "");
   } else {
     currentInput = currentInput * 10 + number;
@@ -96,7 +96,7 @@ function reset() {
   currentInput = 0;
   savedInput = 0;
   summeryGlobal = 0;
-  operator = "+";
+  operator = "";
   updateCurrentInputDisplay(currentInput);
   updateProvSummery("", "");
   killswitch = true;
@@ -107,7 +107,7 @@ function reset() {
 
 // RenderFN
 function updateCurrentInputDisplay(text) {
-  const newDisplay = document.getElementById("operationDisplay");
+  const newDisplay = document.getElementById("CurrentInputDisplay");
 
   newDisplay.innerHTML = text;
 }
