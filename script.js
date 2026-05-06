@@ -2,7 +2,7 @@
 let currentInput = 0;
 let savedInput = 0;
 let operator = "";
-let flowSummery = "";
+let summeryGlobal = "";
 let killswitch = false;
 // append To Display
 
@@ -10,24 +10,24 @@ function startOperate() {
   let currsummery = 0;
   if (operator === "+") {
     currsummery = currentInput + savedInput;
-    flowSummery = currsummery;
+    summeryGlobal = currsummery;
     renderResult();
     savedInput = currsummery;
 
-    console.log(flowSummery);
+    console.log(summeryGlobal);
   } else if (operator === "-") {
     currsummery = savedInput - currentInput;
-    flowSummery = currsummery;
+    summeryGlobal = currsummery;
     renderResult();
     savedInput = currsummery;
   } else if (operator === "*") {
     currsummery = savedInput * currentInput;
-    flowSummery = currsummery;
+    summeryGlobal = currsummery;
     renderResult();
     savedInput = currsummery;
   } else if (operator === "/") {
     currsummery = savedInput / currentInput;
-    flowSummery = currsummery;
+    summeryGlobal = currsummery;
     renderResult();
     savedInput = currsummery;
   } else if (operator === "=") {
@@ -81,7 +81,7 @@ function sumary() {
 function reset() {
   currentInput = 0;
   savedInput = 0;
-  flowSummery = 0;
+  summeryGlobal = 0;
   operator = "+";
   renderOperationDisplay(currentInput);
   renderSummaryDisplay("", "");
@@ -108,7 +108,7 @@ function renderResult() {
   const newRenderelement = document.getElementById("resultDiv");
 
   if (killswitch === false) {
-    newParagraph.innerHTML = `${currentInput} ${operator} ${savedInput} = ${flowSummery}`;
+    newParagraph.innerHTML = `${currentInput} ${operator} ${savedInput} = ${summeryGlobal}`;
     newRenderelement.appendChild(newParagraph);
   } else {
     newRenderelement.innerHTML = "";
@@ -121,7 +121,7 @@ function appendToDisplay(number) {
     currentInput = 0;
     savedInput = 0;
     operator = "+";
-    flowSummery = 0;
+    summeryGlobal = 0;
     renderOperationDisplay(currentInput);
     renderSummaryDisplay("", "");
   } else {
