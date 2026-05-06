@@ -1,7 +1,9 @@
+// Global Variable
 let currNumber = 0;
 let saveNumber = 0;
 let operator = "";
 let flowSummery = "";
+let killswitch = false;
 // append To Display
 
 function startOperate() {
@@ -29,7 +31,9 @@ function startOperate() {
     renderResult();
     saveNumber = currsummery;
   } else if (operator === "=") {
-    renderResult();
+    if (operator !== "=") {
+      renderResult();
+    }
   } else {
     saveNumber = currNumber;
   }
@@ -69,22 +73,20 @@ function dividieren() {
 function sumary() {
   startOperate();
   operator = "=";
-  currNumber = saveNumber;
 
   renderSummaryDisplay(saveNumber, operator);
   renderOperationDisplay(saveNumber);
 }
 
 function reset() {
-  document.getElementById("operationDisplay").innerHTML = "";
-  document.getElementById("summery").innerHTML = "";
-  document.getElementById("resultDiv").innerHTML = "";
   currNumber = 0;
   saveNumber = 0;
   flowSummery = 0;
-  operator = "";
+  operator = "+";
   renderOperationDisplay(currNumber);
-  renderSummaryDisplay(saveNumber, operator);
+  renderSummaryDisplay("", "");
+  killswitch = true;
+  renderResult();
 }
 
 // update and add
@@ -102,11 +104,17 @@ function renderSummaryDisplay(text, text2) {
   newSummeryDisplay.innerHTML = text + text2;
 }
 function renderResult() {
+  const newParagraph = document.createElement("p");
   const newRenderelement = document.getElementById("resultDiv");
 
-  const newParagraph = document.createElement("p");
-  newParagraph.innerHTML = `${currNumber} ${operator} ${saveNumber} = ${flowSummery}`;
-  newRenderelement.appendChild(newParagraph);
+  if (killswitch === false) {
+    newParagraph.innerHTML = `${currNumber} ${operator} ${saveNumber} = ${flowSummery}`;
+    newRenderelement.appendChild(newParagraph);
+  } else {
+    newRenderelement.innerHTML = "";
+    killswitch = false;
+    console.log("lets kill something");
+  }
 }
 function appendToDisplay(number) {
   if (operator === "=") {
@@ -116,7 +124,6 @@ function appendToDisplay(number) {
     flowSummery = 0;
     renderOperationDisplay(currNumber);
     renderSummaryDisplay("", "");
-    console.log("test");
   } else {
     currNumber = currNumber * 10 + number;
     renderOperationDisplay(currNumber);
